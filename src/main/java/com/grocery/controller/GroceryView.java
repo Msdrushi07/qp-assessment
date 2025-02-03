@@ -15,14 +15,14 @@ import com.grocery.service.GroceryMethods;
 @RestController
 @RequestMapping("/view")
 public class GroceryView {
-	
+
 	@Autowired
 	private GroceryMethods groceryMethods;
-	
+
 	@GetMapping
 	public ResponseEntity<List<Grocery>> getGroceries() {
-		List<Grocery> response=groceryMethods.getGroceries();
-		return new ResponseEntity<>(response,HttpStatus.OK);
+		List<Grocery> response = groceryMethods.getGroceries();
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
 }

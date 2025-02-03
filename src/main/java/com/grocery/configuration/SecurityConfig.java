@@ -14,39 +14,25 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
- 
+
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-	    http
-	        .csrf().disable()
-	        .authorizeHttpRequests(auth -> auth
-	        	.antMatchers("/h2-console/**").permitAll()	
-	            .antMatchers("/grocery/**").hasRole("ADMIN")
-	            .antMatchers("/order/**").hasRole("USER")
-	            .antMatchers("/view/**").hasAnyRole("ADMIN","USER")
-	            .anyRequest().authenticated()
-	        )
-	        .formLogin(Customizer.withDefaults())
-			.httpBasic(Customizer.withDefaults());
+		http.csrf().disable()
+				.authorizeHttpRequests(auth -> auth.antMatchers("/h2-console/**").permitAll().antMatchers("/grocery/**")
+						.hasRole("ADMIN").antMatchers("/order/**").hasRole("USER").antMatchers("/view/**")
+						.hasAnyRole("ADMIN", "USER").anyRequest().authenticated())
+				.formLogin(Customizer.withDefaults()).httpBasic(Customizer.withDefaults());
 		return http.build();
 
 	}
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-        UserDetails admin = User.withDefaultPasswordEncoder()
-                .username("admin")
-                .password("admin123")
-                .roles("ADMIN")
-                .build();
- 
-        UserDetails user = User.withDefaultPasswordEncoder()
-                .username("user")
-                .password("user123")
-                .roles("USER")
-                .build();
- 
-        return new InMemoryUserDetailsManager(admin, user);
-    }
-}
+	@Bean
+	public UserDetailsService userDetailsService() {
+		UserDetails admin = User.withDefaultPasswordEncoder().username("admin").password("admin123").roles("ADMIN")
+				.build();
 
+		UserDetails user = User.withDefaultPasswordEncoder().username("user").password("user123").roles("USER").build();
+
+		return new InMemoryUserDetailsManager(admin, user);
+	}
+}

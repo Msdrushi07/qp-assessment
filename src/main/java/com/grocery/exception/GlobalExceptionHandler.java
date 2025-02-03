@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-	
-	@ExceptionHandler(NotFoundException.class) 
-	public ResponseEntity<ExcptionResponse> handlingNotFoundException(NotFoundException exception){
-		ExcptionResponse er = new ExcptionResponse(HttpStatus.NOT_FOUND,exception.getMessage());
-		return new ResponseEntity<ExcptionResponse>(er,HttpStatus.NOT_FOUND);
+
+	@ExceptionHandler(NotFoundException.class)
+	public ResponseEntity<ExcptionResponse> handlingNotFoundException(NotFoundException exception) {
+		ExcptionResponse er = new ExcptionResponse(HttpStatus.NOT_FOUND, exception.getMessage());
+		return new ResponseEntity<ExcptionResponse>(er, HttpStatus.NOT_FOUND);
 	}
 
 }
