@@ -63,4 +63,10 @@ public class GroceryImplement implements GroceryMethods {
 
 	}
 
+	@Override
+	public String gerGrocery(int id) {
+		groceryRepository.findById(id);
+		return "grocery";
+	}
+
 }

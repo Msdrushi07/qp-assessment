@@ -18,4 +18,6 @@ public interface GroceryMethods {
 
 	String orderGroceries(List<Order> order);
 
+	String gerGrocery(int id);
+
 }
